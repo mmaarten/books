@@ -1,6 +1,6 @@
 import { find, get } from "lodash";
 import { Component } from "react";
-import { Badge, Col, Container, Row, Table } from "react-bootstrap";
+import { Alert, Badge, Col, Container, Row, Table } from "react-bootstrap";
 import Helpers from "./Helpers";
 import { Loader } from "./Loader";
 import Model from "./Model";
@@ -62,7 +62,7 @@ class BookDetail extends Component {
   }
 
   render() {
-    const { isLoading, data } = this.state;
+    const { data, isLoading, error } = this.state;
 
     const title         = get(data, 'volumeInfo.title', '(Untitled)');
     const description   = get(data, 'volumeInfo.description', '(No description available)');
@@ -85,6 +85,12 @@ class BookDetail extends Component {
         <Container>
           { isLoading && (
             <Loader className="BookDetail-loader" />
+          ) }
+          { error && (
+            <Alert variant="danger">
+              <Alert.Heading>Error</Alert.Heading>
+              { error }
+            </Alert>
           ) }
           { data && (
             <Row>
