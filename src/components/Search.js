@@ -29,6 +29,8 @@ class Search extends Component {
     this.handleFormSubmit      = this.handleFormSubmit.bind(this);
     this.handleTermChange      = this.handleTermChange.bind(this);
     this.handleSubjectChange   = this.handleSubjectChange.bind(this);
+    this.handleLanguageChange  = this.handleLanguageChange.bind(this);
+    this.handleOrderByChange   = this.handleOrderByChange.bind(this);
     this.handlePaginationClick = this.handlePaginationClick.bind(this);
 
     this.scrollToRef = createRef();
@@ -101,21 +103,29 @@ class Search extends Component {
     this.setState({ subject: event.target.value });
   }
 
+  handleLanguageChange(event) {
+    this.setState({ language: event.target.value });
+  }
+
+  handleOrderByChange(event) {
+    this.setState({ orderBy: event.target.value });
+  }
+
   handlePaginationClick(page) {
     this.setState({ page });
     setTimeout(() => this.getBooks(), 200);
   }
 
   render() {
-    const { term, subject, isLoading, result, error, page, itemsPerPage } = this.state;
+    const { term, subject, language, orderBy, isLoading, result, error, page, itemsPerPage } = this.state;
 
     return (
       <div className="Search">
         <Container>
           <form className="Search-form mb-5" onSubmit={ this.handleFormSubmit }>
-            <div className="row">
-              <div className="col-md-6 offset-md-3">
-                <InputGroup>
+            <Row>
+              <Col className="offset-md-3" md={ 6 }>
+                <InputGroup className="mb-3">
                   <Form.Select className="flex-grow-0 w-auto" defaultValue={ subject } onChange={ this.handleSubjectChange }>
                     <option value="intitle">Title</option>
                     <option value="inauthor">Author</option>
@@ -124,8 +134,30 @@ class Search extends Component {
                   <Form.Control value={ term } onChange={ this.handleTermChange } required />
                   <Button variant="primary" type="submit">Search</Button>
                 </InputGroup>
-              </div>
-            </div>
+                <div className="collapse" id="advanced-search">
+                  <Row className="g-3 mb-3">
+                    <Col md={ 6 }>
+                      <Form.Label htmlFor="search-language">Language</Form.Label>
+                      <Form.Select id="search-language" defaultValue={ language } onChange={ this.handleLanguageChange }>
+                        <option value="nl">Dutch</option>
+                        <option value="fr">French</option>
+                        <option value="en">English</option>
+                      </Form.Select>
+                    </Col>
+                    <Col md={ 6 }>
+                      <Form.Label htmlFor="search-order-by">Order By</Form.Label>
+                      <Form.Select id="search-order-by" defaultValue={ orderBy } onChange={ this.handleOrderByChange }>
+                        <option value="relevance">Relevance</option>
+                        <option value="newest">Published Date</option>
+                      </Form.Select>
+                    </Col>
+                  </Row>
+                </div>
+                <div className="text-center">
+                  <Button variant="link" size="sm" data-bs-toggle="collapse" data-bs-target="#advanced-search" aria-expanded="false" aria-controls="advanced-search">Toggle advanced</Button>
+                </div>
+              </Col>
+            </Row>
           </form>
           { isLoading && (
             <Loader className="Search-loader" />
