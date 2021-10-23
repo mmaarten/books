@@ -1,0 +1,59 @@
+@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap-icons/font/bootstrap-icons";
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+#loader {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $zindex-sticky;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($white, .85);
+  animation: fadein .5s;
+
+  &.BookDetail-loader {
+    position: absolute;
+  }
+}
+
+#book-detail-modal {
+  .modal-header {
+    border-bottom-color: transparent;
+  }
+  .modal-body {
+    position: relative;
+    min-height: map-get($spacers, 5) + $spinner-height;
+  }
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.Book-image {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  object-position: center bottom;
+  filter:
+    drop-shadow(0 -1px 0 $gray-300)
+    drop-shadow(0 2px 0 $gray-300)
+    drop-shadow(-1px 0 0 $gray-300)
+    drop-shadow(2px 0 0 $gray-300);
+}
+
+.Book-rating {
+  .bi.small:before {
+    vertical-align: .0001em;
+  }
+}

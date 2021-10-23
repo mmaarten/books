@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "popper.js";
+import "jquery";
+import "bootstrap";
+import "./App.scss";
+import Search from "./components/Search";
+import { BrowserRouter, Route } from "react-router-dom";
+import { Component } from "react";
+import BookDetailModal from "./components/BookDetailModal";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <BrowserRouter basename="books">
+        <div className="App">
+          <main className="App-main py-5">
+            <Search />
+            <Route
+              path="/book/:id"
+              render={ props => <BookDetailModal bookId={ props.match.params.id } /> }
+            />
+          </main>
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
