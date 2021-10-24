@@ -8,6 +8,19 @@ import { Loader } from "./Loader";
 import Model from "./Model";
 import { Pagination } from "./Pagination";
 
+const USER_LANGUAGE    = Helpers.getUserLanguage().substring(0, 2);
+const DEFAULT_LANGUAGE = USER_LANGUAGE;
+let LANGUAGES          = ['nl', 'fr', 'en', 'es', 'it', 'de'];
+
+if (LANGUAGES.indexOf(USER_LANGUAGE) === -1) {
+  LANGUAGES.push(USER_LANGUAGE);
+}
+
+let LANGUAGE_OPTIONS = {}
+map(Helpers.getLanguages(LANGUAGES), lang => {
+  LANGUAGE_OPTIONS[lang.code] = lang.int;
+});
+
 class Search extends Component {
 
   constructor(props) {
@@ -16,7 +29,7 @@ class Search extends Component {
     this.state = assign({
       term        : '',
       subject     : 'intitle',
-      language    : 'en',
+      language    : DEFAULT_LANGUAGE,
       orderBy     : 'relevance',
       printType   : 'books',
       itemsPerPage: 24,
@@ -139,9 +152,9 @@ class Search extends Component {
                     <Col md={ 6 }>
                       <Form.Label htmlFor="search-language">Language</Form.Label>
                       <Form.Select id="search-language" defaultValue={ language } onChange={ this.handleLanguageChange }>
-                        <option value="nl">Dutch</option>
-                        <option value="fr">French</option>
-                        <option value="en">English</option>
+                        { map(LANGUAGE_OPTIONS, (text, value) => (
+                          <option value={ value } key={ value }>{ text }</option>
+                        )) }
                       </Form.Select>
                     </Col>
                     <Col md={ 6 }>
