@@ -13,7 +13,7 @@ export const Book = ({ ...props }) => {
   const ratingsCount = get(data, 'volumeInfo.ratingsCount', 0);
 
   return (
-    <div className="Book position-relative text-center">
+    <div className="Book position-relative text-center" title={ title }>
       <img className="Book-image mb-2" src={ image } alt={ title } />
       <Rating className="Book-rating small text-muted mb-1" amount={ rating } count={ ratingsCount } />
       <h3 className="Book-title h6 ellipsis mb-1">{ title }</h3>
