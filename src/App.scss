@@ -40,6 +40,12 @@
   }
 }
 
+.Book-rating {
+  .bi.small:before {
+    vertical-align: .0001em;
+  }
+}
+
 .Book-image,
 .BookDetail-image {
   width: 100%;
@@ -55,10 +61,4 @@
 
 .BookDetail-image {
   object-position: left bottom;
-}
-
-.Book-rating {
-  .bi.small:before {
-    vertical-align: .0001em;
-  }
 }
