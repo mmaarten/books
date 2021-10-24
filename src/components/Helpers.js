@@ -11,10 +11,13 @@ class Helpers {
     return navigator.language || navigator.userLanguage;
   }
 
-  static getLanguage(code) {
+  static getLanguages(codes) {
     const Model = require('lang-list');
-    const list = Model.getList({ supportedLangs: [code] });
-    return first(list);
+    return Model.getList({ supportedLangs: codes });
+  }
+
+  static getLanguage(code) {
+    return first( Helpers.getLanguages([ code ]) );
   }
 
   static parseDate(value) {

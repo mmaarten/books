@@ -6,6 +6,12 @@
   to   { opacity: 1; }
 }
 
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 #loader {
   position: fixed;
   top: 0;
@@ -34,13 +40,8 @@
   }
 }
 
-.ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.Book-image {
+.Book-image,
+.BookDetail-image {
   width: 100%;
   height: 160px;
   object-fit: contain;
@@ -50,6 +51,10 @@
     drop-shadow(0 2px 0 $gray-300)
     drop-shadow(-1px 0 0 $gray-300)
     drop-shadow(2px 0 0 $gray-300);
+}
+
+.BookDetail-image {
+  object-position: left bottom;
 }
 
 .Book-rating {

@@ -16,7 +16,9 @@ class App extends Component {
             <Search />
             <Route
               path="/book/:id"
-              render={ props => <BookDetailModal bookId={ props.match.params.id } /> }
+              render={ props => (
+                <BookDetailModal bookId={ props.match.params.id } />
+              ) }
             />
           </main>
         </div>
