@@ -6,6 +6,14 @@ export const Rating = ({ ...props }) => {
 
   const myClassName = classNames('rating', className);
 
+  const votes = count === 1 ? 'vote' : 'votes';
+
+  let altCount = count;
+
+  if (altCount > 1000) {
+    altCount = (altCount / 1000).toFixed(1) + 'k';
+  }
+
   if (amount === false) {
     return (
       <div className={ myClassName } { ...otherProps }>
@@ -16,7 +24,7 @@ export const Rating = ({ ...props }) => {
 
   return (
     <div className={ myClassName } { ...otherProps }>
-      <Icon className="small" name="star-fill" variant="warning" /> { amount }/{ total } • { count }
+      <Icon className="small" name="star-fill" variant="warning" /> { amount }/{ total } • { altCount } { votes }
     </div>
   )
 };
