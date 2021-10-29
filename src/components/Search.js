@@ -189,7 +189,7 @@ class Search extends Component {
           { result && result.items.length > 0 && (
             <>
               <div className="Search-result my-5">
-                <Row sm={ 2 } md={ 3 } lg={ 4 } xl={ 6 } className="g-4">
+                <Row xs={ 1 } sm={ 2 } md={ 3 } lg={ 4 } xl={ 6 } className="g-4">
                   { map(result.items, item => (
                     <Col key={ item.id }>
                       <Book data={ item } />
