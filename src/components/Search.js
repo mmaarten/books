@@ -200,7 +200,7 @@ class Search extends Component {
               <Pagination
                 className="justify-content-center mt-5"
                 current={ page }
-                total={ Math.floor(result.totalItems / itemsPerPage) }
+                total={ Math.ceil(result.totalItems / itemsPerPage) }
                 onClick={ this.handlePaginationClick }
               />
             </>

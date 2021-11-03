@@ -4,6 +4,10 @@ import { Icon } from "./Icon";
 export const Pagination = ({ ...props }) => {
   const { current, total, span = 3, onClick, ...otherProps } = props;
 
+  if (total === 1) {
+    return <></>
+  }
+
   let items = [];
   for (let n = 1; n <= total; n++) {
     if (n === 1 || n === total || (n >= current - span && n <= current + span)) {
