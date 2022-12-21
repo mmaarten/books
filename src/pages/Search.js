@@ -1,6 +1,6 @@
 import { assign, map } from "lodash";
 import { Component, createRef } from "react";
-import { Alert, Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
+import { Alert, Button, Col, Collapse, Container, Form, InputGroup, Row } from "react-bootstrap";
 import { collect } from "react-recollect";
 import Book from "../components/Book";
 import { getLanguages, getUserLanguage, scrollTo } from "../components/Helpers";
@@ -37,6 +37,7 @@ class Search extends Component {
       result      : null,
       error       : '',
       page        : 1,
+      isAdvanced  : false,
     }, this.props.store);
 
     this.handleFormSubmit      = this.handleFormSubmit.bind(this);
@@ -45,6 +46,7 @@ class Search extends Component {
     this.handleLanguageChange  = this.handleLanguageChange.bind(this);
     this.handleOrderByChange   = this.handleOrderByChange.bind(this);
     this.handlePaginationClick = this.handlePaginationClick.bind(this);
+    this.onAdvancedSearchClick = this.onAdvancedSearchClick.bind(this);
 
     this.scrollToRef = createRef();
   }
@@ -129,14 +131,20 @@ class Search extends Component {
     setTimeout(() => this.getBooks(), 200);
   }
 
+  onAdvancedSearchClick() {
+    const { isAdvanced } = this.state;
+
+    this.setState({ isAdvanced: !isAdvanced })
+  }
+
   render() {
-    const { term, subject, language, orderBy, isLoading, result, error, page, itemsPerPage } = this.state;
+    const { term, subject, language, orderBy, isLoading, result, error, page, itemsPerPage, isAdvanced } = this.state;
     return (
       <Container className="py-5">
         <form id="search-form" onSubmit={ this.handleFormSubmit }>
           <Row>
             <Col className="offset-md-3" md={ 6 }>
-              <InputGroup className="mb-3" size="lg">
+              <InputGroup className="mb-3">
                 <Form.Select className="flex-grow-0 w-auto" defaultValue={ subject } onChange={ this.handleSubjectChange }>
                   <option value="intitle">Title</option>
                   <option value="inauthor">Author</option>
@@ -145,7 +153,7 @@ class Search extends Component {
                 <Form.Control value={ term } onChange={ this.handleTermChange } required placeholder="Search…" />
                 <Button variant="primary" type="submit">Search</Button>
               </InputGroup>
-              <div className="collapse" id="advanced-search">
+              <Collapse id="advanced-search" in={ isAdvanced }>
                 <Row className="g-3 mb-3">
                   <Col md={ 6 }>
                     <Form.Label htmlFor="search-language">Language</Form.Label>
@@ -163,9 +171,14 @@ class Search extends Component {
                     </Form.Select>
                   </Col>
                 </Row>
-              </div>
+              </Collapse>
               <div className="text-center">
-                <Button variant="link" size="sm" data-bs-toggle="collapse" data-bs-target="#advanced-search" aria-expanded="false" aria-controls="advanced-search">Toggle advanced</Button>
+                <Button
+                  variant="link"
+                  aria-expanded={ isAdvanced ? 'true' : 'false' }
+                  aria-controls="advanced-search"
+                  onClick={ this.onAdvancedSearchClick }
+                >Toggle advanced</Button>
               </div>
             </Col>
           </Row>
@@ -193,7 +206,7 @@ class Search extends Component {
               </Row>
             </div>
             <Pagination
-              className="justify-content-center mt-5"
+              id="search-pagination"
               current={ page }
               total={ Math.ceil(result.totalItems / itemsPerPage) }
               onClick={ this.handlePaginationClick }
