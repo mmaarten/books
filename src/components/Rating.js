@@ -1,7 +1,7 @@
 import classNames from "classnames";
-import { Icon } from "./Icon";
+import Icon from "./Icon";
 
-export const Rating = ({ ...props }) => {
+const Rating = ({ ...props }) => {
   const { amount = false, total = 5, count, className, ...otherProps } = props;
 
   const myClassName = classNames('rating', className);
@@ -24,7 +24,9 @@ export const Rating = ({ ...props }) => {
 
   return (
     <div className={ myClassName } { ...otherProps }>
-      <Icon className="small" name="star-fill" variant="warning" /> { amount }/{ total } • { altCount } { votes }
+      <Icon name="star-fill" /> { amount }/{ total } • { altCount } { votes }
     </div>
   )
 };
+
+export default Rating;

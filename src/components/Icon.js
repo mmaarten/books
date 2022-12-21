@@ -1,6 +1,6 @@
 import classNames from "classnames";
 
-export const Icon = ({ ...props }) => {
+const Icon = ({ ...props }) => {
   const { name, className, variant, ...otherProps } = props;
 
   const myClassName = classNames('bi', {
@@ -12,3 +12,5 @@ export const Icon = ({ ...props }) => {
     <i className={ myClassName } { ...otherProps }></i>
   );
 };
+
+export default Icon;

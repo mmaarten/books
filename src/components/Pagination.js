@@ -1,7 +1,7 @@
 import { Pagination as VendorPagination } from "react-bootstrap";
-import { Icon } from "./Icon";
+import Icon from "./Icon";
 
-export const Pagination = ({ ...props }) => {
+const Pagination = ({ ...props }) => {
   const { current, total, span = 3, onClick, ...otherProps } = props;
 
   if (total === 1) {
@@ -44,3 +44,5 @@ export const Pagination = ({ ...props }) => {
     </VendorPagination>
   );
 };
+
+export default Pagination;

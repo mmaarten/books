@@ -1,23 +1,28 @@
-import axios from "axios";
-import { assign } from "lodash";
+import axios from "axios"
+import { assign } from "lodash"
 
-class Model {
-
-  static getBook(bookId) {
-    return axios.get(`https://www.googleapis.com/books/v1/volumes/${bookId}`, {
-      params : { key: process.env.REACT_APP_GOOGLE_API_KEY },
-    });
-  }
-
-  static getBooks(params) {
-    return axios.get('https://www.googleapis.com/books/v1/volumes', {
-      params: assign({ key: process.env.REACT_APP_GOOGLE_API_KEY }, params),
-    });
-  }
-
-  static getFrontCover(bookId, height = 160) {
-    return `https://books.google.be/books/content?id=${bookId}&printsec=frontcover&img=1&zoom=1&h=${height}&stbn=1`;
-  }
+/**
+ * Get volumes
+ *
+ * @link https://developers.google.com/books/docs/v1/using#WorkingVolumes
+ */
+export const getVolumes = (params) => {
+  return axios.get('https://www.googleapis.com/books/v1/volumes', {
+    params: assign({}, params),
+  });
 }
 
-export default Model;
+/**
+ * Get volume
+ *
+ * @link https://developers.google.com/books/docs/v1/using#RetrievingVolume
+ */
+export const getVolume = (id, params) => {
+  return axios.get(`https://www.googleapis.com/books/v1/volumes/${id}`, {
+    params: assign({}, params),
+  });
+}
+
+export const getFrontCover = (bookId, height = 160) => {
+  return `https://books.google.be/books/content?id=${bookId}&printsec=frontcover&img=1&zoom=1&h=${height}&stbn=1`;
+}
