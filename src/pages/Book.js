@@ -1,6 +1,6 @@
 import { find, get } from "lodash";
 import { Component } from "react";
-import { Alert, Badge, Button, Col, Container, Row, Table } from "react-bootstrap";
+import { Alert, Button, Col, Container, Row, Table } from "react-bootstrap";
 import { getLanguage, parseDate } from "../components/Helpers";
 import Loader from "../components/Loader";
 import { getFrontCover, getVolume } from "../components/Model";
@@ -12,6 +12,8 @@ class Book extends Component {
 
   constructor(props) {
     super(props);
+
+    this.onBackButtonClick = this.onBackButtonClick.bind(this);
 
     this.state = {
       data     : null,
@@ -60,9 +62,14 @@ class Book extends Component {
     });
   }
 
+  onBackButtonClick() {
+    const { navigate } = this.props;
+
+    navigate(-1);
+  }
+
   render() {
     const { data, isLoading, error } = this.state;
-    const { navigate } = this.props;
 
     const title         = get(data, 'volumeInfo.title', '(Untitled)');
     const description   = get(data, 'volumeInfo.description', '(No description available)');
@@ -80,7 +87,7 @@ class Book extends Component {
     const isbn13 = get( find(industryIdentifiers, value => value.type === 'ISBN_13'), 'identifier');
 
     return (
-      <Container className="py-5">
+      <Container className="book-detail py-5">
         { isLoading && (
           <Loader />
         ) }
@@ -93,16 +100,16 @@ class Book extends Component {
         { data && (
           <Row>
             <Col className="order-lg-last mb-3 mb-lg-0" lg={ 8 }>
-              <h1 className="BookDetail-title">{ title }</h1>
-              <div className="BookDetail-description" dangerouslySetInnerHTML={{ __html: description }}></div>
+              <h1 className="book-title">{ title }</h1>
+              <div className="book-description" dangerouslySetInnerHTML={{ __html: description }}></div>
               <div className="mt-4">
-                <Button variant="outline-primary" onClick={ () => navigate(-1) }>Back</Button>
+                <Button variant="primary" onClick={ this.onBackButtonClick }>Back</Button>
               </div>
 
             </Col>
             <Col className="order-lg-first" lg={ 4 }>
-              <img className="BookDetail-image mb-3" src={ image } alt={ title } />
-              <Table className="BookDetail-meta" bordered>
+              <img className="book-image mb-3" src={ image } alt={ title } />
+              <Table className="book-meta" bordered>
                 <tbody>
                   { authors.length > 0 && (
                     <tr>

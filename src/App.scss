@@ -51,6 +51,10 @@
     drop-shadow(2px 0 0 $gray-300);
 }
 
+.book-detail .book-image {
+  object-position: left bottom;
+}
+
 .book-authors {
   @extend .ellipsis;
   @extend .small;
@@ -76,4 +80,14 @@
 #search-meta,
 #search-result {
   @extend .my-5;
+}
+
+#search-form {
+  @extend .mb-5;
+}
+
+#search-pagination {
+  @extend .justify-content-center;
+  @extend .mt-5;
+  @extend .mb-0;
 }
