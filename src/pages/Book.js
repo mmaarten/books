@@ -5,7 +5,7 @@ import { getLanguage, parseDate } from "../components/Helpers";
 import Loader from "../components/Loader";
 import { getFrontCover, getVolume } from "../components/Model";
 import Rating from "../components/Rating";
-import withNavigate from "../components/with-history";
+import withNavigate from "../components/with-navigate";
 import withParams from "./../components/with-params";
 
 class Book extends Component {
