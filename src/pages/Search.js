@@ -144,7 +144,7 @@ class Search extends Component {
         <form id="search-form" onSubmit={ this.handleFormSubmit }>
           <Row>
             <Col className="offset-md-3" md={ 6 }>
-              <InputGroup className="mb-3">
+              <InputGroup  size="lg" className="mb-3">
                 <Form.Select className="flex-grow-0 w-auto" defaultValue={ subject } onChange={ this.handleSubjectChange }>
                   <option value="intitle">Title</option>
                   <option value="inauthor">Author</option>
@@ -201,7 +201,9 @@ class Search extends Component {
             <div id="search-result">
               <Row className="g-4" xs={ 2 } sm={ 2 } md={ 3 } lg={ 4 } xl={ 6 }>
                 { map(result.items, (item, i) => (
-                  <Book key={ i } data={ item } />
+                  <Col>
+                    <Book key={ i } data={ item } />
+                  </Col>
                 )) }
               </Row>
             </div>
