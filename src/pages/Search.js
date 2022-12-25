@@ -201,8 +201,8 @@ class Search extends Component {
             <div id="search-result">
               <Row className="g-4" xs={ 2 } sm={ 2 } md={ 3 } lg={ 4 } xl={ 6 }>
                 { map(result.items, (item, i) => (
-                  <Col>
-                    <Book key={ i } data={ item } />
+                  <Col key={ i }>
+                    <Book data={ item } />
                   </Col>
                 )) }
               </Row>

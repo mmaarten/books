@@ -1,10 +1,9 @@
 import { find, get } from "lodash";
 import { Component } from "react";
 import { Alert, Button, Col, Container, Row, Table } from "react-bootstrap";
-import { Bookshelves } from "../components/Bookshelves";
 import { getLanguage, parseDate } from "../components/Helpers";
 import Loader from "../components/Loader";
-import { getBookshelves, getFrontCover, getVolume } from "../components/Model";
+import { getFrontCover, getVolume } from "../components/Model";
 import Rating from "../components/Rating";
 import withNavigate from "../components/with-navigate";
 import withParams from "./../components/with-params";
@@ -20,7 +19,6 @@ class Book extends Component {
       data     : null,
       isLoading: false,
       error    : '',
-      showBookshelves: false,
     };
   }
 
@@ -74,7 +72,7 @@ class Book extends Component {
   }
 
   render() {
-    const { data, isLoading, error, showBookshelves } = this.state;
+    const { data, isLoading, error } = this.state;
 
     const title         = get(data, 'volumeInfo.title', '(Untitled)');
     const description   = get(data, 'volumeInfo.description', '(No description available)');
@@ -109,9 +107,7 @@ class Book extends Component {
               <div className="book-detail-description" dangerouslySetInnerHTML={{ __html: description }}></div>
               <div className="mt-4">
                 <Button variant="primary" onClick={ this.onBackButtonClick }>Back</Button>
-                <Button onClick={ () => { this.setState({ showBookshelves: !showBookshelves }) } }>Bookshelves</Button>
               </div>
-              <Bookshelves bookId={ data.id } show={ showBookshelves } onHide={ () => this.setState({ showBookshelves: false }) } />
             </Col>
             <Col className="order-lg-first" lg={ 4 }>
               <img className="book-image mb-3" src={ image } alt={ title } />
