@@ -2,7 +2,7 @@ import "popper.js";
 import "jquery";
 import "bootstrap";
 import "./App.scss";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Component } from "react";
 import Search from "./pages/Search";
 import Book from "./pages/Book";
