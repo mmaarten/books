@@ -10,7 +10,7 @@ import Book from "./pages/Book";
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename="books">
         <main>
           <Routes>
             <Route path="/" element={ <Search /> }></Route>
